@@ -4,46 +4,32 @@ using Unity.Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    public CinemachineCamera freeLook;
-    public InputActionReference lookAction;
-
-    public float sensitivity = 0.12f;
-    public float minPitch = -20f;
-    public float maxPitch = 70f;
+    [SerializeField] private CinemachineCamera freeLook;
+    [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private float sensitivity = 0.12f;
 
     private CinemachineOrbitalFollow orbit;
 
-    private float yaw;
-    private float pitch;
-
-    void Start()
+    private void Awake()
     {
         orbit = freeLook.GetComponent<CinemachineOrbitalFollow>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         lookAction.action.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         lookAction.action.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 mouse = lookAction.action.ReadValue<Vector2>();
 
-        yaw += mouse.x * sensitivity;
-        pitch -= mouse.y * sensitivity;
-
-        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-
-        orbit.HorizontalAxis.Value = yaw;
-        orbit.VerticalAxis.Value = pitch;
+        orbit.HorizontalAxis.Value += mouse.x * sensitivity;
+        orbit.VerticalAxis.Value -= mouse.y * sensitivity;
     }
 }

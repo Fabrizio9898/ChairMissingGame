@@ -65,6 +65,8 @@ public class UIManager : MonoBehaviour
     public void HideMainMenu()
     {
         mainMenuPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 

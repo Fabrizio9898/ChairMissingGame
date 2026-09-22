@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimiento")]
-    [SerializeField] private float walkSpeed = 1.5f;
-    [SerializeField] private float runSpeed = 5f;
+    [SerializeField] private float walkSpeed = 2f;
+    [SerializeField] private float runSpeed = 3.5f;
     [SerializeField] private float rotationSpeed = 360f;
 
     [Header("Gravedad")]

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
             RegisterParticipant(ai);
         }
 
-        StartNextRound();
+        StartRound();
     }
 
 
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void StartNextRound()
+    public void StartRound()
     {
         CurrentRound++;
 
