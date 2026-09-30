@@ -19,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private float verticalVelocity;
 
+    private Vector2 input;
+    private bool isRunning;
+
+    public bool IsMoving => input.sqrMagnitude > 0.01f;
+    public bool IsRunning => isRunning;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -38,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Camera viewCamera = Camera.main;
 
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
+        input = moveAction.action.ReadValue<Vector2>();
 
         Vector3 forward = viewCamera.transform.forward;
         forward.y = 0;
@@ -52,10 +58,10 @@ public class PlayerMovement : MonoBehaviour
             right * input.x +
             forward * input.y;
 
-        bool running =
+        isRunning =
             Keyboard.current.leftShiftKey.isPressed;
 
-        float speed = running ? runSpeed : walkSpeed;
+        float speed = isRunning ? runSpeed : walkSpeed;
 
         if (controller.isGrounded)
         {
